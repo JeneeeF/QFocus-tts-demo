@@ -65,7 +65,7 @@
   <div class="max-w-5xl mx-auto">
     <!-- 页面标题 -->
     <header class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-gray-800 mb-4">Speech Modification Demo</h1>
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">QFocus: Controllable Synthesis for Automated Speech Stress Editing to Deliver Human-Like Emphatic Intent</h1>
       <p class="text-secondary text-lg">The tts demo pages</p>
     </header>
     
@@ -94,32 +94,30 @@
         <p class="text-gray-600 mb-3">
           <span class="font-semibold">Text:</span> "我们<span class="font-bold text-red-600">每个人</span>都很开心。"
         </p>
-        <p class="text-gray-600 mb-4">
-          <span class="font-semibold">Description:</span> Demonstration of basic stress editing on a standard sentence
-        </p>
+      
         
         <!-- 音频对比组 -->
         <div class="audio-comparison">
           <!-- 方法1 -->
           <div class="audio-player player-method1">
-            <div class="mb-2 font-medium text-method1">Baseline Method</div>
+            <div class="mb-2 font-medium text-method1">Ground Truth</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s1g1a1">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="bkm21_8416137-gt">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s1g1a1" style="width: 0%"></div>
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="bkm21_8416137-gt" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s1g1a1">0:00</span>
+                  <span class="time-current" data-audio="bkm21_8416137-gt">0:00</span>
                 </div>
               </div>
-              <a href="audio/s1g1a1.mp3" download="s1g1a1.mp3" class="text-gray-500 hover:text-method1 transition-colors">
+              <a href="audio/1/bkm21_8416137-gt.wav" download="bkm21_8416137-gt.wav" class="text-gray-500 hover:text-method1 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s1g1a1" src="audio/s1g1a1.mp3"></audio>
+            <audio id="bkm21_8416137-gt" src="audio/1/bkm21_8416137-gt.wav"></audio>
           </div>
           
           <!-- 方法2 -->
