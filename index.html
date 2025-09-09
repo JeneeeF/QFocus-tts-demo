@@ -2,79 +2,615 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Emphasis-TTS Demo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 40px auto;
-      max-width: 900px;
-      line-height: 1.6;
-      color: #333;
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome图标 -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <title>QFocus: Controllable Synthesis for Automated Speech Stress Editing to Deliver Human-Like Emphatic Intent</title>
+  
+  <!-- 配置Tailwind自定义主题 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#64748b',
+            neutral: '#f1f5f9',
+            method1: '#3b82f6',    // 方法1的颜色
+            method2: '#10b981',    // 方法2的颜色
+            method3: '#f59e0b',    // 方法3的颜色
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
     }
-    h1, h2, h3 {
-      font-weight: 600;
-      margin-top: 1.2em;
-    }
-    a { color: #1a73e8; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1em 0;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background: #f7f7f7;
-    }
-    audio {
-      width: 100%;
-    }
-    .note {
-      color: #555;
-      font-style: italic;
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .section-card {
+        @apply bg-white rounded-xl shadow-md p-6 mb-10 transition-all duration-300 hover:shadow-lg;
+      }
+      .sample-group {
+        @apply mb-8 p-4 border border-gray-100 rounded-lg bg-gray-50;
+      }
+      .audio-comparison {
+        @apply grid grid-cols-1 md:grid-cols-3 gap-4 mt-4;
+      }
+      .audio-player {
+        @apply bg-white rounded-lg p-4 shadow-sm transition-all duration-200 hover:shadow;
+      }
+      .player-method1 {
+        @apply border-t-4 border-method1;
+      }
+      .player-method2 {
+        @apply border-t-4 border-method2;
+      }
+      .player-method3 {
+        @apply border-t-4 border-method3;
+      }
     }
   </style>
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen py-10 px-4 md:px-8">
+  <div class="max-w-5xl mx-auto">
+    <!-- 页面标题 -->
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">Speech Modification Demo</h1>
+      <p class="text-secondary text-lg">The tts demo pages</p>
+    </header>
+    
+    <!-- 项目介绍 -->
+    <div class="bg-white rounded-xl shadow-sm p-6 mb-10">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-3">Abstract</h2>
+      <p class="text-gray-600 mb-4">
+        aaaaa
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Speech Processing</span>
+        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Audio Comparison</span>
+        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Research Demo</span>
+      </div>
+    </div>
+    
+    <!-- 章节1: Automated Speech Stress Editing ability -->
+    <section class="section-card">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
+        1. Automated Speech Stress Editing Ability
+      </h2>
+      
+      <!-- 样本组1 -->
+      <div class="sample-group">
+        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 1.1</h3>
+        <p class="text-gray-600 mb-3">
+          <span class="font-semibold">Text:</span> "我们<span class="font-bold text-red-600">每个人</span>都很开心。"
+        </p>
+        <p class="text-gray-600 mb-4">
+          <span class="font-semibold">Description:</span> Demonstration of basic stress editing on a standard sentence
+        </p>
+        
+        <!-- 音频对比组 -->
+        <div class="audio-comparison">
+          <!-- 方法1 -->
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">Baseline Method</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s1g1a1">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s1g1a1" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s1g1a1">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s1g1a1.mp3" download="s1g1a1.mp3" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s1g1a1" src="audio/s1g1a1.mp3"></audio>
+          </div>
+          
+          <!-- 方法2 -->
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Proposed Method A</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s1g1a2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s1g1a2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s1g1a2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s1g1a2.mp3" download="s1g1a2.mp3" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s1g1a2" src="audio/s1g1a2.mp3">
+          </div>
+          
+          <!-- 方法3 -->
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Proposed Method B</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s1g1a3">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s1g1a3" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s1g1a3">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s1g1a3.mp3" download="s1g1a3.mp3" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s1g1a3" src="audio/s1g1a3.mp3">
+          </div>
+        </div>
+      </div>
+      
+      <!-- 样本组2 -->
+      <div class="sample-group">
+        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 1.2: Complex Sentence Stress</h3>
+        <p class="text-gray-600 mb-3">
+          <span class="font-semibold">Text:</span> "If music be the food of love, play on"
+        </p>
+        <p class="text-gray-600 mb-4">
+          <span class="font-semibold">Description:</span> Stress editing applied to a more complex linguistic structure
+        </p>
+        
+        <!-- 音频对比组 -->
+        <div class="audio-comparison">
+          <!-- 方法1 -->
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">Baseline Method</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s1g2a1">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s1g2a1" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s1g2a1">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s1g2a1.mp3" download="s1g2a1.mp3" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s1g2a1" src="audio/s1g2a1.mp3">
+          </div>
+          
+          <!-- 方法2 -->
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Proposed Method A</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s1g2a2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s1g2a2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s1g2a2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s1g2a2.mp3" download="s1g2a2.mp3" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s1g2a2" src="audio/s1g2a2.mp3">
+          </div>
+          
+          <!-- 方法3 -->
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Proposed Method B</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s1g2a3">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s1g2a3" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s1g2a3">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s1g2a3.mp3" download="s1g2a3.mp3" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s1g2a3" src="audio/s1g2a3.mp3">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 章节2: Emphasis effect with different stress position -->
+    <section class="section-card">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
+        2. Emphasis Effect with Different Stress Positions
+      </h2>
+      
+      <!-- 样本组1 -->
+      <div class="sample-group">
+        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 2.1: Noun vs. Verb Emphasis</h3>
+        <p class="text-gray-600 mb-3">
+          <span class="font-semibold">Text:</span> "I present you this present"
+        </p>
+        <p class="text-gray-600 mb-4">
+          <span class="font-semibold">Description:</span> Demonstrating emphasis on different word positions
+        </p>
+        
+        <!-- 音频对比组 -->
+        <div class="audio-comparison">
+          <!-- 方法1 -->
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">First Word Emphasis</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s2g1a1">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s2g1a1" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2g1a1">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s2g1a1.mp3" download="s2g1a1.mp3" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2g1a1" src="audio/s2g1a1.mp3">
+          </div>
+          
+          <!-- 方法2 -->
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Last Word Emphasis</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s2g1a2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s2g1a2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2g1a2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s2g1a2.mp3" download="s2g1a2.mp3" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2g1a2" src="audio/s2g1a2.mp3">
+          </div>
+          
+          <!-- 方法3 -->
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Balanced Emphasis</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s2g1a3">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s2g1a3" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2g1a3">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s2g1a3.mp3" download="s2g1a3.mp3" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2g1a3" src="audio/s2g1a3.mp3">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 章节3: Comparison Experiments -->
+    <section class="section-card">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
+        3. Comparison Experiments
+      </h2>
+      
+      <!-- 样本组1 -->
+      <div class="sample-group">
+        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 3.1: Natural Speech Comparison</h3>
+        <p class="text-gray-600 mb-3">
+          <span class="font-semibold">Text:</span> "The experiment shows significant results"
+        </p>
+        <p class="text-gray-600 mb-4">
+          <span class="font-semibold">Description:</span> Comparison with state-of-the-art methods
+        </p>
+        
+        <!-- 音频对比组 -->
+        <div class="audio-comparison">
+          <!-- 方法1 -->
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">Original Recording</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3g1a1">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3g1a1" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s3g1a1">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s3g1a1.mp3" download="s3g1a1.mp3" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s3g1a1" src="audio/s3g1a1.mp3">
+          </div>
+          
+          <!-- 方法2 -->
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Competitor Method X</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3g1a2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3g1a2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s3g1a2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s3g1a2.mp3" download="s3g1a2.mp3" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s3g1a2" src="audio/s3g1a2.mp3">
+          </div>
+          
+          <!-- 方法3 -->
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Our Proposed Method</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s3g1a3">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s3g1a3" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s3g1a3">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s3g1a3.mp3" download="s3g1a3.mp3" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s3g1a3" src="audio/s3g1a3.mp3">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 章节4: Ablation Experiments -->
+    <section class="section-card">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
+        4. Ablation Experiments
+      </h2>
+      
+      <!-- 样本组1 -->
+      <div class="sample-group">
+        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 4.1: Component Analysis</h3>
+        <p class="text-gray-600 mb-3">
+          <span class="font-semibold">Text:</span> "Ablation testing reveals component contributions"
+        </p>
+        <p class="text-gray-600 mb-4">
+          <span class="font-semibold">Description:</span> Analysis of individual components' contributions
+        </p>
+        
+        <!-- 音频对比组 -->
+        <div class="audio-comparison">
+          <!-- 方法1 -->
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">Full Model</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s4g1a1">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s4g1a1" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s4g1a1">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s4g1a1.mp3" download="s4g1a1.mp3" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s4g1a1" src="audio/s4g1a1.mp3">
+          </div>
+          
+          <!-- 方法2 -->
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Without Component A</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s4g1a2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s4g1a2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s4g1a2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s4g1a2.mp3" download="s4g1a2.mp3" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s4g1a2" src="audio/s4g1a2.mp3">
+          </div>
+          
+          <!-- 方法3 -->
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Without Component B</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s4g1a3">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s4g1a3" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s4g1a3">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s4g1a3.mp3" download="s4g1a3.mp3" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s4g1a3" src="audio/s4g1a3.mp3">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 感谢信息 -->
+    <div class="text-center py-8">
+      <p class="text-xl text-gray-700 font-medium">Thank you for your patience</p>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="text-center text-gray-500 text-sm py-6 border-t border-gray-200">
+      <p>© 2023 Speech Modification Demo. Hosted on GitHub Pages.</p>
+      <p class="mt-2">
+        <a href="https://github.com/yourusername/speech-modification-demo" class="text-primary hover:underline" target="_blank">
+          <i class="fa fa-github mr-1"></i> View on GitHub
+        </a>
+      </p>
+    </footer>
+  </div>
 
-  <h1>Emphasis-TTS: </h1>
-  <p><a href="https://arxiv.org/abs/2305.12107" target="_blank">arXiv:2305.12107</a></p>
-
-  <h3>Authors</h3>
-  <p>Jingyi Fang<br>
-  Zhejiang University</p>
-
-  <h3>Abstract</h3>
-  <p>
-    ...111111
-  </p>
-
-  <h2>Audio Samples</h2>
-  <p class="note">Bold characters in the texts means the position should be <b>emphasized</b></p>
-
-  <h3>Section 1: Overall Performance of Emphasis-TTS</h3>
-  <h4>1.1 Comparison with GT </h4>
-
-  <p><b>Mandarin text:</b> 你真的太帅了。<br>
-  </p>
-
-  <table>
-    <tr>
-      <th>Emphasis-TTS<br>(GT emphasis labels)</th>
-      <th>Emphasis-TTS<br>(Customized emphasis labels)</th>
-      <th>Ground Truth</th>
-    </tr>
-    <tr>
-      <td><audio controls src="audio/1.wav"></audio></td>
-      <td><audio controls src="audio/2.wav"></audio></td>
-      <td><audio controls src="audio/3.wav"></audio></td>
-    </tr>
-  </table>
-
+  <!-- 音频播放器功能的JavaScript -->
+  <script>
+    // 等待DOM加载完成
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取所有播放按钮和音频元素
+      const playButtons = document.querySelectorAll('.play-btn');
+      const audioElements = {};
+      const progressBars = {};
+      const timeCurrent = {};
+      
+      // 初始化音频元素引用
+      document.querySelectorAll('audio').forEach(audio => {
+        const id = audio.id;
+        audioElements[id] = audio;
+        progressBars[id] = document.querySelector(`.progress-bar[data-audio="${id}"]`);
+        timeCurrent[id] = document.querySelector(`.time-current[data-audio="${id}"]`);
+        
+        // 当音频播放位置更新时更新进度条
+        audio.addEventListener('timeupdate', function() {
+          if (isNaN(audio.duration)) return;
+          const progress = (audio.currentTime / audio.duration) * 100;
+          progressBars[id].style.width = `${progress}%`;
+          timeCurrent[id].textContent = formatTime(audio.currentTime);
+        });
+        
+        // 当音频播放结束时重置播放按钮
+        audio.addEventListener('ended', function() {
+          const btn = document.querySelector(`.play-btn[data-audio="${id}"]`);
+          btn.innerHTML = '<i class="fa fa-play text-xl"></i>';
+        });
+      });
+      
+      // 为播放按钮添加点击事件
+      playButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const audioId = this.getAttribute('data-audio');
+          const audio = audioElements[audioId];
+          
+          if (audio.paused) {
+            // 暂停其他正在播放的音频
+            Object.values(audioElements).forEach(otherAudio => {
+              if (otherAudio !== audio && !otherAudio.paused) {
+                otherAudio.pause();
+                const otherBtn = document.querySelector(`.play-btn[data-audio="${otherAudio.id}"]`);
+                otherBtn.innerHTML = '<i class="fa fa-play text-xl"></i>';
+              }
+            });
+            
+            // 播放当前音频
+            audio.play();
+            this.innerHTML = '<i class="fa fa-pause text-xl"></i>';
+          } else {
+            // 暂停当前音频
+            audio.pause();
+            this.innerHTML = '<i class="fa fa-play text-xl"></i>';
+          }
+        });
+      });
+      
+      // 为进度条添加点击事件，允许跳转到音频的特定位置
+      document.querySelectorAll('.audio-player').forEach(player => {
+        const progressContainer = player.querySelector('.bg-gray-200');
+        if (!progressContainer) return;
+        
+        const audioId = progressContainer.querySelector('.progress-bar').getAttribute('data-audio');
+        const audio = audioElements[audioId];
+        
+        progressContainer.addEventListener('click', function(e) {
+          if (isNaN(audio.duration)) return;
+          
+          const rect = this.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          audio.currentTime = pos * audio.duration;
+        });
+      });
+      
+      // 格式化时间（将秒转换为分:秒格式）
+      function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+      }
+    });
+  </script>
 </body>
 </html>
+    
