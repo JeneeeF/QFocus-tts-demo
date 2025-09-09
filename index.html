@@ -22,6 +22,8 @@
             method1: '#3b82f6',    // 方法1的颜色
             method2: '#10b981',    // 方法2的颜色
             method3: '#f59e0b',    // 方法3的颜色
+            method4: '#ef4444',    // 新增方法4的颜色（红色）
+            method5: '#8b5cf6',    // 新增方法5的颜色（紫色）
           },
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -43,23 +45,25 @@
       .sample-group {
         @apply mb-8 p-4 border border-gray-100 rounded-lg bg-gray-50;
       }
-      .audio-comparison {
+      /* 5列布局 */
+      .audio-comparison-5 {
+        @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4;
+      }
+      /* 3列布局 */
+      .audio-comparison-3 {
         @apply grid grid-cols-1 md:grid-cols-3 gap-4 mt-4;
       }
       .audio-player {
         @apply bg-white rounded-lg p-4 shadow-sm transition-all duration-200 hover:shadow;
       }
-      .player-method1 {
-        @apply border-t-4 border-method1;
-      }
-      .player-method2 {
-        @apply border-t-4 border-method2;
-      }
-      .player-method3 {
-        @apply border-t-4 border-method3;
-      }
+      .player-method1 { @apply border-t-4 border-method1; }
+      .player-method2 { @apply border-t-4 border-method2; }
+      .player-method3 { @apply border-t-4 border-method3; }
+      .player-method4 { @apply border-t-4 border-method4; }
+      .player-method5 { @apply border-t-4 border-method5; }
     }
   </style>
+  
 </head>
 <body class="bg-gray-50 min-h-screen py-10 px-4 md:px-8">
   <div class="max-w-5xl mx-auto">
@@ -252,9 +256,9 @@
       
       <!-- 样本组1 -->
       <div class="sample-group">
-        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 2.1: Noun vs. Verb Emphasis</h3>
+        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 2.1:</h3>
         <p class="text-gray-600 mb-3">
-          <span class="font-semibold">Text:</span> "I present you this present"
+          <span class="font-semibold">Text:</span> "你真的好帅啊"
         </p>
         <p class="text-gray-600 mb-4">
           <span class="font-semibold">Description:</span> Demonstrating emphasis on different word positions
@@ -327,6 +331,51 @@
             </div>
             <audio id="s2g1a3" src="audio/s2g1a3.mp3">
           </div>
+
+          <!-- 方法4 -->
+          <div class="audio-player player-method4">
+            <div class="mb-2 font-medium text-method4">Balanced Emphasis</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method4/80 transition-colors" data-audio="s2g1a4">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method4 h-2 rounded-full" data-audio="s2g1a4" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2g1a4">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s2g1a4.mp3" download="s2g1a4.mp3" class="text-gray-500 hover:text-method4 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2g1a4" src="audio/s2g1a4.mp3">
+          </div>
+
+          <!-- 方法5 -->
+          <div class="audio-player player-method5">
+            <div class="mb-2 font-medium text-method5">Balanced Emphasis</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method5/80 transition-colors" data-audio="s2g1a5">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method5 h-2 rounded-full" data-audio="s2g1a5" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2g1a5">0:00</span>
+                </div>
+              </div>
+              <a href="audio/s2g1a5.mp3" download="s2g1a5.mp3" class="text-gray-500 hover:text-method5 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2g1a5" src="audio/s2g1a5.mp3">
+          </div>
+          
         </div>
       </div>
     </section>
