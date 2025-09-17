@@ -70,63 +70,79 @@
     <!-- 页面标题 -->
     <header class="text-center mb-12">
       <h1 class="text-4xl font-bold text-gray-800 mb-4">QFocus: Controllable Synthesis for Automated Speech Stress Editing to Deliver Human-Like Emphatic Intent</h1>
-      <p class="text-secondary text-lg">The tts demo pages</p>
+      <p class="text-secondary text-lg">Jingyi Fang, Yufei Tang, Zhiyu Wu, Yuanzhong Zheng, Yaoxuan Wang, Haojun Fei</p>
     </header>
     
     <!-- 项目介绍 -->
     <div class="bg-white rounded-xl shadow-sm p-6 mb-10">
       <h2 class="text-2xl font-semibold text-gray-800 mb-3">Abstract</h2>
       <p class="text-gray-600 mb-4">
-        aaaaa
+        QFocus is a framework desined for automated prosodic emphasis editing that enables precise control of emphasis positions in speech synthesis. By integrating an Emphasis Gating Network (EGN) and emphasis-aware loss functions, QFocus effectively embeds stress cues into text representations and supervises emphasized parts. We introduce a dedicated evaluation protocol for emphasis editing and demonstrate, on both in-domain and out-of-domain datasets, that QFocus not only achieves accurate emphasis generation but also ensures the expressiveness of synthesized speech. Experiments show that QFocus outperforms baselines such as CosyVoice2 and EME-TTS, while requiring only a small amount of annotated data and maintaining strong generalization.
       </p>
       <div class="flex flex-wrap gap-2">
-        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Speech Processing</span>
-        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Audio Comparison</span>
-        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Research Demo</span>
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Automated Stress Editing</span>
+        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Emphasis Speech Synthesis</span>
+        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Speech Signal Processing</span>
+      </div>
+    </div>
+    
+    <!-- 提示框: 红色加粗词语表示重音词 -->
+    <div id="emphasis-tip" class="section-card bg-blue-50 border-l-4 border-blue-400">
+      <div class="flex items-start justify-between">
+        <div class="flex items-start gap-3">
+          <i class="fa fa-info-circle text-blue-500 text-2xl mt-1"></i>
+          <div>
+            <h3 class="font-semibold text-gray-800">Tips</h3>
+            <p class="text-gray-600">The <span class="font-bold text-red-600"> bold and red words</span> in the text are the predefined emphasis words.</p>
+            
+          </div>
+        </div>
+        <button onclick="document.getElementById('emphasis-tip').style.display='none'" class="text-gray-400 hover:text-gray-600 ml-4" aria-label="关闭提示">
+          <i class="fa fa-times"></i>
+        </button>
       </div>
     </div>
     
     <!-- 章节1: Automated Speech Stress Editing ability -->
     <section class="section-card">
       <h2 class="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
-        1. Automated Speech Stress Editing Ability
+        1. Automated Speech Stress Editing
       </h2>
       
       <!-- 样本组1 -->
       <div class="sample-group">
-        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 1.1</h3>
         <p class="text-gray-600 mb-3">
           <span class="font-semibold">Text:</span> "我们<span class="font-bold text-red-600">每个人</span>都很开心。"
         </p>
       
         
-        <!-- 音频对比组 -->
+        <!-- 音频对比组（已将 Ground Truth 与 QFocus 交换位置） -->
         <div class="audio-comparison-3">
-          <!-- 方法1 -->
+          <!-- 方法1 (现在展示 QFocus) -->
           <div class="audio-player player-method1">
-            <div class="mb-2 font-medium text-method1">Ground Truth</div>
+            <div class="mb-2 font-medium text-method1">QFocus</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="bkm21_8416137-gt">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s1g1a3">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="bkm21_8416137-gt" style="width: 0%"></div>
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s1g1a3" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="bkm21_8416137-gt">0:00</span>
+                  <span class="time-current" data-audio="s1g1a3">0:00</span>
                 </div>
               </div>
-              <a href="audio/1/bkm21_8416137-gt.wav" download="bkm21_8416137-gt.wav" class="text-gray-500 hover:text-method1 transition-colors">
+              <a href="audio/1/bkm21_8416137-qfocus.wav" download="bkm21_8416137-qfocus.wav" class="text-gray-500 hover:text-method1 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="bkm21_8416137-gt" src="audio/1/bkm21_8416137-gt.wav"></audio>
+            <audio id="s1g1a3" src="audio/1/bkm21_8416137-qfocus.wav"></audio>
           </div>
           
-          <!-- 方法2 -->
+          <!-- 方法2 (Manually Editing, 保持不变) -->
           <div class="audio-player player-method2">
-            <div class="mb-2 font-medium text-method2">Manually Modify</div>
+            <div class="mb-2 font-medium text-method2">Manually Editing</div>
             <div class="flex items-center gap-3">
               <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s1g1a2">
                 <i class="fa fa-play text-xl"></i>
@@ -143,67 +159,135 @@
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s1g1a2" src="audio/1/bkm21_8416137-手动修改.wav">
+            <audio id="s1g1a2" src="audio/1/bkm21_8416137-手动修改.wav"></audio>
           </div>
           
-          <!-- 方法3 -->
+          <!-- 方法3 (现在展示 Ground Truth) -->
           <div class="audio-player player-method3">
-            <div class="mb-2 font-medium text-method3">QFocus</div>
+            <div class="mb-2 font-medium text-method3">Ground Truth</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s1g1a3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="bkm21_8416137-gt">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s1g1a3" style="width: 0%"></div>
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="bkm21_8416137-gt" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s1g1a3">0:00</span>
+                  <span class="time-current" data-audio="bkm21_8416137-gt">0:00</span>
                 </div>
               </div>
-              <a href="audio/1/bkm21_8416137-qfocus.wav" download="bkm21_8416137-qfocus.wav" class="text-gray-500 hover:text-method3 transition-colors">
+              <a href="audio/1/bkm21_8416137-gt.wav" download="bkm21_8416137-gt.wav" class="text-gray-500 hover:text-method3 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s1g1a3" src="audio/1/bkm21_8416137-qfocus.wav">
+            <audio id="bkm21_8416137-gt" src="audio/1/bkm21_8416137-gt.wav"></audio>
+          </div>
+        </div>
+
+        <!-- 新增一行三列音频与文本 -->
+        <p class="text-gray-600 mt-4 mb-3">
+          <span class="font-semibold">Text:</span> "家里太久没来<span class="font-bold text-red-600">这么多</span>客人了。"
+        </p>
+        <div class="audio-comparison-3">
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">QFocus</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="bkf30_0342139_qfocus">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="bkf30_0342139_qfocus" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="bkf30_0342139_qfocus">0:00</span>
+                </div>
+              </div>
+              <a href="audio/1/bkf30_0342139-qfocus.wav" download="bkf30_0342139-qfocus.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="bkf30_0342139_qfocus" src="audio/1/bkf30_0342139-qfocus.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Manually Editing</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="bkf30_0342139_manual">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="bkf30_0342139_manual" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="bkf30_0342139_manual">0:00</span>
+                </div>
+              </div>
+              <a href="audio/1/bkf30_0342139-手动修改.wav" download="bkf30_0342139-手动修改.wav" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="bkf30_0342139_manual" src="audio/1/bkf30_0342139-手动修改.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Ground Truth</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="bkf30_0342139_gt">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="bkf30_0342139_gt" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="bkf30_0342139_gt">0:00</span>
+                </div>
+              </div>
+              <a href="audio/1/bkf30_0342139-gt.wav" download="bkf30_0342139-gt.wav" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="bkf30_0342139_gt" src="audio/1/bkf30_0342139-gt.wav"></audio>
           </div>
         </div>
       </div>
       
       <!-- 样本组2 -->
       <div class="sample-group">
-        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 1.2</h3>
         <p class="text-gray-600 mb-3">
           <span class="font-semibold">Text:</span>"Tim <span class="font-bold text-red-600">took</span> off his wet vest and started to weep."
         </p>
         
-        <!-- 音频对比组 -->
+        <!-- 音频对比组（已将 Ground Truth 与 QFocus 交换位置） -->
         <div class="audio-comparison-3">
-          <!-- 方法1 -->
+          <!-- 方法1 (现在展示 QFocus) -->
           <div class="audio-player player-method1">
-            <div class="mb-2 font-medium text-method1">Gound Truth</div>
+            <div class="mb-2 font-medium text-method1">QFocus</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s1g2a1">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s1g2a3">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s1g2a1" style="width: 0%"></div>
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s1g2a3" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s1g2a1">0:00</span>
+                  <span class="time-current" data-audio="s1g2a3">0:00</span>
                 </div>
               </div>
-              <a href="audio/1/TSI_M_872_31_862-gt.wav" download="TSI_M_872_31_862-gt.wav" class="text-gray-500 hover:text-method1 transition-colors">
+              <a href="audio/1/TSI_M_872_31_862-qfocus.wav" download="TSI_M_872_31_862-qfocus.wav" class="text-gray-500 hover:text-method1 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s1g2a1" src="audio/1/TSI_M_872_31_862-gt.wav">
+            <audio id="s1g2a3" src="audio/1/TSI_M_872_31_862-qfocus.wav"></audio>
           </div>
           
-          <!-- 方法2 -->
+          <!-- 方法2 (Manually Editing, 保持不变) -->
           <div class="audio-player player-method2">
-            <div class="mb-2 font-medium text-method2">Manually Modify</div>
+            <div class="mb-2 font-medium text-method2">Manually Editing</div>
             <div class="flex items-center gap-3">
               <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s1g2a2">
                 <i class="fa fa-play text-xl"></i>
@@ -220,43 +304,112 @@
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s1g2a2" src="audio/1/TSI_M_872_31_862-手动修改.wav">
+            <audio id="s1g2a2" src="audio/1/TSI_M_872_31_862-手动修改.wav"></audio>
           </div>
           
-          <!-- 方法3 -->
+          <!-- 方法3 (现在展示 Ground Truth) -->
           <div class="audio-player player-method3">
-            <div class="mb-2 font-medium text-method3">QFocus</div>
+            <div class="mb-2 font-medium text-method3">Ground Truth</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s1g2a3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s1g2a1">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s1g2a3" style="width: 0%"></div>
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s1g2a1" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s1g2a3">0:00</span>
+                  <span class="time-current" data-audio="s1g2a1">0:00</span>
                 </div>
               </div>
-              <a href="audio/1/TSI_M_872_31_862-qfocus.wav" download="TSI_M_872_31_862-qfocus.wav" class="text-gray-500 hover:text-method3 transition-colors">
+              <a href="audio/1/TSI_M_872_31_862-gt.wav" download="TSI_M_872_31_862-gt.wav" class="text-gray-500 hover:text-method3 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s1g2a3" src="audio/1/TSI_M_872_31_862-qfocus.wav">
+            <audio id="s1g2a1" src="audio/1/TSI_M_872_31_862-gt.wav"></audio>
+          </div>
+        </div>
+
+        <!-- 新增一行三列音频与文本 -->
+        <p class="text-gray-600 mt-4 mb-3">
+          <span class="font-semibold">Text:</span> "When it was <span class="font-bold text-red-600">time</span> to go home, Tim felt tired but happy."
+        </p>
+        <div class="audio-comparison-3">
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">QFocus</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="TSA_M_766_27_757_qfocus">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="TSA_M_766_27_757_qfocus" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="TSA_M_766_27_757_qfocus">0:00</span>
+                </div>
+              </div>
+              <a href="audio/1/TSA_M_766_27_757-qfocus.wav" download="TSA_M_766_27_757-qfocus.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="TSA_M_766_27_757_qfocus" src="audio/1/TSA_M_766_27_757-qfocus.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Manually Editing</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="TSA_M_766_27_757_manual">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="TSA_M_766_27_757_manual" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="TSA_M_766_27_757_manual">0:00</span>
+                </div>
+              </div>
+              <a href="audio/1/TSA_M_766_27_757-手动修改.wav" download="TSA_M_766_27_757-手动修改.wav" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="TSA_M_766_27_757_manual" src="audio/1/TSA_M_766_27_757-手动修改.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Ground Truth</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="TSA_M_766_27_757_gt">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="TSA_M_766_27_757_gt" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="TSA_M_766_27_757_gt">0:00</span>
+                </div>
+              </div>
+              <a href="audio/1/TSA_M_766_27_757-gt.wav" download="TSA_M_766_27_757-gt.wav" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="TSA_M_766_27_757_gt" src="audio/1/TSA_M_766_27_757-gt.wav"></audio>
           </div>
         </div>
       </div>
+
     </section>
     
     <!-- 章节2: Emphasis effect with different stress position -->
     <section class="section-card">
       <h2 class="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
-        2. Emphasis Effect with Different Stress Positions
+        2. Controllable Emphasis with Different Stress Positions
       </h2>
       
       <!-- 样本组1 -->
       <div class="sample-group">
-        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 2.1:</h3>
         <p class="text-gray-600 mb-3">
           <span class="font-semibold">Text:</span> "你真的好帅啊"
         </p>
@@ -375,7 +528,316 @@
             </div>
             <audio id="s2g1a5" src="audio/2/3_bkf30_4.wav">
           </div>
-          
+        </div>
+      </div>
+
+      <!-- 新增示例：你一定要相信这个消息 -->
+      <div class="sample-group">
+        <p class="text-gray-600 mb-3">
+          <span class="font-semibold">Text:</span> "你一定要相信这个消息"
+        </p>
+
+        <!-- 三列音频：no Emphasis / Emphasis on "这个" / Emphasis on "消息" -->
+        <div class="audio-comparison-3">
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">no Emphasis</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s2bkf_a1">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s2bkf_a1" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2bkf_a1">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/qfocus_bkf30_无重音.wav" download="qfocus_bkf30_无重音.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2bkf_a1" src="audio/2/qfocus_bkf30_无重音.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Emphasis on "这个"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s2bkf_a3">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s2bkf_a3" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2bkf_a3">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/qfocus_unseen_19_ZH_这个.wav" download="qfocus_unseen_19_ZH_这个.wav" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2bkf_a3" src="audio/2/qfocus_unseen_19_ZH_这个.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Emphasis on "消息"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s2bkf_a4">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s2bkf_a4" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2bkf_a4">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/qfocus_bkf30_消息.wav" download="qfocus_bkf30_消息.wav" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2bkf_a4" src="audio/2/qfocus_bkf30_消息.wav"></audio>
+          </div>
+        </div>
+      </div>
+    
+
+      <!-- 新增样本组: 不同位置的重音效果 -->
+      <div class="sample-group">
+        <p class="text-gray-600 mb-3">
+          <span class="font-semibold">Text:</span> "The overall architecture of our model is shown in figure."
+        </p>
+
+        <!-- 三列音频：no Emphasis / Emphasis on "overall" / Emphasis on "architecture" -->
+        <div class="audio-comparison-3">
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">no Emphasis</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s2new2_a1">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s2new2_a1" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2new2_a1">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/TSD_M-无重音.wav" download="TSD_M-无重音.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2new2_a1" src="audio/2/TSD_M-无重音.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Emphasis on "overall"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s2new2_a2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s2new2_a2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2new2_a2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/1_TSD_M_1.wav" download="1_TSD_M_1.wav" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2new2_a2" src="audio/2/1_TSD_M_1.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Emphasis on "architecture"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s2new2_a3">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s2new2_a3" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2new2_a3">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/1_TSD_M_2.wav" download="1_TSD_M_2.wav" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2new2_a3" src="audio/2/1_TSD_M_2.wav"></audio>
+          </div>
+        </div>
+
+        <!-- 单列（仅最左）音频：Emphasis on "figure" -->
+        <div class="mt-4">
+          <div class="audio-player player-method1 w-full md:w-1/3">
+            <div class="mb-2 font-medium text-method1">Emphasis on "figure"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s2new2_a4">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s2new2_a4" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2new2_a4">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/1_TSD_M_9.wav" download="1_TSD_M_9.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2new2_a4" src="audio/2/1_TSD_M_9.wav"></audio>
+          </div>
+        </div>
+      </div>
+
+      <!-- 新增样本组: 强调“你”和“能量”的音频 -->
+      <div class="sample-group">
+        <p class="text-gray-600 mb-3">
+          <span class="font-semibold">Text:</span> "Your voice is full of energy, I guess you're in your twenties."
+        </p>
+
+        <!-- 三列音频：no Emphasis / Emphasis on "voice" / Emphasis on "full" -->
+        <div class="audio-comparison-3">
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">no Emphasis</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s2ex02_a1">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s2ex02_a1" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2ex02_a1">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/qfocus_ex02_无重音.wav" download="qfocus_ex02_无重音.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2ex02_a1" src="audio/2/qfocus_ex02_无重音.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Emphasis on "voice"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s2ex02_a2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s2ex02_a2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2ex02_a2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/2_ex02_voice.wav" download="2_ex02_voice.wav" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2ex02_a2" src="audio/2/2_ex02_voice.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Emphasis on "full"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s2ex02_a3">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s2ex02_a3" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2ex02_a3">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/qfocus_ex02_full.wav" download="2_ex02_full.wav" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2ex02_a3" src="audio/2/qfocus_ex02_full.wav"></audio>
+          </div>
+        </div>
+
+        <!-- 两列音频：Emphasis on "energy" / Emphasis on "you're" / Emphasis on "twenties" -->
+        <div class="audio-comparison-3 mt-4">
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">Emphasis on "energy"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s2ex02_a4">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s2ex02_a4" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2ex02_a4">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/2_ex02_energy.wav" download="2_ex02_energy.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2ex02_a4" src="audio/2/2_ex02_energy.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Emphasis on "you're"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s2ex02_ayoure">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s2ex02_ayoure" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2ex02_ayoure">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/2_ex02_youre.wav" download="2_ex02_youre.wav" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2ex02_ayoure" src="audio/2/2_ex02_youre.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">Emphasis on "twenties"</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s2ex02_a5">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s2ex02_a5" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s2ex02_a5">0:00</span>
+                </div>
+              </div>
+              <a href="audio/2/2_ex02_twenties.wav" download="2_ex02_twenties.wav" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s2ex02_a5" src="audio/2/2_ex02_twenties.wav"></audio>
+          </div>
         </div>
       </div>
     </section>
@@ -388,86 +850,410 @@
       
       <!-- 样本组1 -->
       <div class="sample-group">
-        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 3.1: Natural Speech Comparison</h3>
+        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 3.1: compared with Cosyvoice2</h3>
         <p class="text-gray-600 mb-3">
-          <span class="font-semibold">Text:</span> "The experiment shows significant results"
-        </p>
-        <p class="text-gray-600 mb-4">
-          <span class="font-semibold">Description:</span> Comparison with state-of-the-art methods
+          <span class="font-semibold">Text:</span> "You must tell the truth <span class="font-bold text-red-600">today</span>"
         </p>
         
-        <!-- 音频对比组 -->
-        <div class="audio-comparison">
-          <!-- 方法1 -->
+        <!-- 两列音频：QFocus / Cosyvoice2 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <div class="audio-player player-method1">
-            <div class="mb-2 font-medium text-method1">Original Recording</div>
+            <div class="mb-2 font-medium text-method1">QFocus</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3g1a1">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3comp_qf">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3g1a1" style="width: 0%"></div>
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3comp_qf" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s3g1a1">0:00</span>
+                  <span class="time-current" data-audio="s3comp_qf">0:00</span>
                 </div>
               </div>
-              <a href="audio/s3g1a1.mp3" download="s3g1a1.mp3" class="text-gray-500 hover:text-method1 transition-colors">
+              <a href="audio/3/qfocus_unseen_3_EN_5.wav" download="qfocus_unseen_3_EN_5.wav" class="text-gray-500 hover:text-method1 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s3g1a1" src="audio/s3g1a1.mp3">
+            <audio id="s3comp_qf" src="audio/3/qfocus_unseen_3_EN_5.wav"></audio>
           </div>
-          
-          <!-- 方法2 -->
+
           <div class="audio-player player-method2">
-            <div class="mb-2 font-medium text-method2">Competitor Method X</div>
+            <div class="mb-2 font-medium text-method2">Cosyvoice2</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3g1a2">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3comp_cv2">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3g1a2" style="width: 0%"></div>
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3comp_cv2" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s3g1a2">0:00</span>
+                  <span class="time-current" data-audio="s3comp_cv2">0:00</span>
                 </div>
               </div>
-              <a href="audio/s3g1a2.mp3" download="s3g1a2.mp3" class="text-gray-500 hover:text-method2 transition-colors">
+              <a href="audio/3/cv2_unseen_3_EN_5.wav" download="cv2_unseen_3_EN_5.wav" class="text-gray-500 hover:text-method2 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s3g1a2" src="audio/s3g1a2.mp3">
-          </div>
-          
-          <!-- 方法3 -->
-          <div class="audio-player player-method3">
-            <div class="mb-2 font-medium text-method3">Our Proposed Method</div>
-            <div class="flex items-center gap-3">
-              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s3g1a3">
-                <i class="fa fa-play text-xl"></i>
-              </button>
-              <div class="flex-1">
-                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s3g1a3" style="width: 0%"></div>
-                </div>
-                <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s3g1a3">0:00</span>
-                </div>
-              </div>
-              <a href="audio/s3g1a3.mp3" download="s3g1a3.mp3" class="text-gray-500 hover:text-method3 transition-colors">
-                <i class="fa fa-download"></i>
-              </a>
-            </div>
-            <audio id="s3g1a3" src="audio/s3g1a3.mp3">
+            <audio id="s3comp_cv2" src="audio/3/cv2_unseen_3_EN_5.wav"></audio>
           </div>
         </div>
+       
+       
+       
+       
+     
+
+     <!-- 新增示例: She just came to see a friend -->
+     
+        <p class="text-gray-600 mt-5 mb-3">
+          <span class="font-semibold">Text:</span> "She <span class="font-bold text-red-600">just</span> came to see a friend"
+        </p>
+
+        <!-- 两列音频：QFocus / Cosyvoice2 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">QFocus</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3comp_qf2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3comp_qf2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s3comp_qf2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/3/qfocus_unseen_4_EN_1.wav" download="qfocus_unseen_4_EN_1.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s3comp_qf2" src="audio/3/qfocus_unseen_4_EN_1.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">Cosyvoice2</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3comp_cv2_2">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3comp_cv2_2" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="s3comp_cv2_2">0:00</span>
+                </div>
+              </div>
+              <a href="audio/3/cv2_unseen_4_EN_1.wav" download="cv2_unseen_4_EN_1.wav" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="s3comp_cv2_2" src="audio/3/cv2_unseen_4_EN_1.wav"></audio>
+          </div>
+        </div>
+     
+
+     <!-- 新增中文示例 -->
+     <p class="text-gray-600 mb-3 mt-5">
+       <span class="font-semibold">Text:</span> "你为什么打<span class="font-bold text-red-600">他</span>。"
+     </p>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+       <div class="audio-player player-method1">
+         <div class="mb-2 font-medium text-method1">QFocus</div>
+         <div class="flex items-center gap-3">
+           <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3comp_qf3">
+             <i class="fa fa-play text-xl"></i>
+           </button>
+           <div class="flex-1">
+             <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+               <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3comp_qf3" style="width: 0%"></div>
+             </div>
+             <div class="text-xs text-gray-500">
+               <span class="time-current" data-audio="s3comp_qf3">0:00</span>
+             </div>
+           </div>
+           <a href="audio/3/qfocus_unseen_5_ZH_5.wav" download="qfocus_unseen_5_ZH_5.wav" class="text-gray-500 hover:text-method1 transition-colors">
+             <i class="fa fa-download"></i>
+           </a>
+         </div>
+         <audio id="s3comp_qf3" src="audio/3/qfocus_unseen_5_ZH_5.wav"></audio>
+       </div>
+
+       <div class="audio-player player-method2">
+         <div class="mb-2 font-medium text-method2">Cosyvoice2</div>
+         <div class="flex items-center gap-3">
+           <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3comp_cv2_3">
+             <i class="fa fa-play text-xl"></i>
+           </button>
+           <div class="flex-1">
+             <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+               <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3comp_cv2_3" style="width: 0%"></div>
+             </div>
+             <div class="text-xs text-gray-500">
+               <span class="time-current" data-audio="s3comp_cv2_3">0:00</span>
+             </div>
+           </div>
+           <a href="audio/3/cv2_unseen_5_ZH_5.wav" download="cv2_unseen_5_ZH_5.wav" class="text-gray-500 hover:text-method2 transition-colors">
+             <i class="fa fa-download"></i>
+           </a>
+         </div>
+         <audio id="s3comp_cv2_3" src="audio/3/cv2_unseen_5_ZH_5.wav"></audio>
+       </div>
+     </div>
+
+     <!-- 再增一例：我没说他偷我钱 -->
+     <p class="text-gray-600 mb-3 mt-5">
+       <span class="font-semibold">Text:</span> "我<span class="font-bold text-red-600">没</span>说他偷我钱"
+     </p>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+       <div class="audio-player player-method1">
+         <div class="mb-2 font-medium text-method1">QFocus</div>
+         <div class="flex items-center gap-3">
+           <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3comp_qf4">
+             <i class="fa fa-play text-xl"></i>
+           </button>
+           <div class="flex-1">
+             <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+               <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3comp_qf4" style="width: 0%"></div>
+             </div>
+             <div class="text-xs text-gray-500">
+               <span class="time-current" data-audio="s3comp_qf4">0:00</span>
+             </div>
+           </div>
+           <a href="audio/3/qfocus_unseen_2_ZH_1.wav" download="qfocus_unseen_2_ZH_1.wav" class="text-gray-500 hover:text-method1 transition-colors">
+             <i class="fa fa-download"></i>
+           </a>
+         </div>
+         <audio id="s3comp_qf4" src="audio/3/qfocus_unseen_2_ZH_1.wav"></audio>
+       </div>
+
+       <div class="audio-player player-method2">
+         <div class="mb-2 font-medium text-method2">Cosyvoice2</div>
+         <div class="flex items-center gap-3">
+           <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3comp_cv2_4">
+             <i class="fa fa-play text-xl"></i>
+           </button>
+           <div class="flex-1">
+             <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+               <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3comp_cv2_4" style="width: 0%"></div>
+             </div>
+             <div class="text-xs text-gray-500">
+               <span class="time-current" data-audio="s3comp_cv2_4">0:00</span>
+             </div>
+           </div>
+           <a href="audio/3/cv2_unseen_2_ZH_1.wav" download="cv2_unseen_2_ZH_1.wav" class="text-gray-500 hover:text-method2 transition-colors">
+             <i class="fa fa-download"></i>
+           </a>
+         </div>
+         <audio id="s3comp_cv2_4" src="audio/3/cv2_unseen_2_ZH_1.wav"></audio>
+       </div>
+     </div>
+     </div>
+     <!-- 新增样本组: Sample 3.2 compared with EME-TTS -->
+     <div class="sample-group">
+      <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 3.2: compared with EME-TTS</h3>
+
+      <!-- 第一组：now 加粗标红 -->
+      <p class="text-gray-600 mb-3">
+        <span class="font-semibold">Text:</span> "She is <span class="font-bold text-red-600">now</span> choosing skirt to wear."
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div class="audio-player player-method1">
+          <div class="mb-2 font-medium text-method1">QFocus</div>
+          <div class="flex items-center gap-3">
+            <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3eme_qf1">
+              <i class="fa fa-play text-xl"></i>
+            </button>
+            <div class="flex-1">
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3eme_qf1" style="width: 0%"></div>
+              </div>
+              <div class="text-xs text-gray-500">
+                <span class="time-current" data-audio="s3eme_qf1">0:00</span>
+              </div>
+            </div>
+            <a href="audio/3/qfocus_unseen_31_EN_2.wav" download="qfocus_unseen_31_EN_2.wav" class="text-gray-500 hover:text-method1 transition-colors">
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+          <audio id="s3eme_qf1" src="audio/3/qfocus_unseen_31_EN_2.wav"></audio>
+        </div>
+
+        <div class="audio-player player-method2">
+          <div class="mb-2 font-medium text-method2">EME-TTS</div>
+          <div class="flex items-center gap-3">
+            <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3eme_eme1">
+              <i class="fa fa-play text-xl"></i>
+            </button>
+            <div class="flex-1">
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3eme_eme1" style="width: 0%"></div>
+              </div>
+              <div class="text-xs text-gray-500">
+                <span class="time-current" data-audio="s3eme_eme1">0:00</span>
+              </div>
+            </div>
+            <a href="audio/3/EME_01_now_angry.wav" download="EME_01_now_angry.wav" class="text-gray-500 hover:text-method2 transition-colors">
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+          <audio id="s3eme_eme1" src="audio/3/EME_01_now_angry.wav"></audio>
+        </div>
       </div>
+
+      <!-- 第二组：choosing 加粗标红 -->
+      <p class="text-gray-600 mb-3 mt-6">
+        <span class="font-semibold">Text:</span> "She is now <span class="font-bold text-red-600">choosing</span> skirt to wear."
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+        <div class="audio-player player-method1">
+          <div class="mb-2 font-medium text-method1">QFocus</div>
+          <div class="flex items-center gap-3">
+            <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3eme_qf2">
+              <i class="fa fa-play text-xl"></i>
+            </button>
+            <div class="flex-1">
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3eme_qf2" style="width: 0%"></div>
+              </div>
+              <div class="text-xs text-gray-500">
+                <span class="time-current" data-audio="s3eme_qf2">0:00</span>
+              </div>
+            </div>
+            <a href="audio/3/qfocus_unseen_31_EN_3.wav" download="qfocus_unseen_31_EN_3.wav" class="text-gray-500 hover:text-method1 transition-colors">
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+          <audio id="s3eme_qf2" src="audio/3/qfocus_unseen_31_EN_3.wav"></audio>
+        </div>
+
+        <div class="audio-player player-method2">
+          <div class="mb-2 font-medium text-method2">EME-TTS</div>
+          <div class="flex items-center gap-3">
+            <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3eme_eme2">
+              <i class="fa fa-play text-xl"></i>
+            </button>
+            <div class="flex-1">
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3eme_eme2" style="width: 0%"></div>
+              </div>
+              <div class="text-xs text-gray-500">
+                <span class="time-current" data-audio="s3eme_eme2">0:00</span>
+              </div>
+            </div>
+            <a href="audio/3/EME_01_choosing_neutral.wav" download="EME_01_choosing_neutral.wav" class="text-gray-500 hover:text-method2 transition-colors">
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+          <audio id="s3eme_eme2" src="audio/3/EME_01_choosing_neutral.wav"></audio>
+        </div>
+      </div>
+
+      <!-- 第三组：skirt 加粗标红 -->
+      <p class="text-gray-600 mb-3 mt-6">
+        <span class="font-semibold">Text:</span> "She is now choosing <span class="font-bold text-red-600">skirt</span> to wear."
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+        <div class="audio-player player-method1">
+          <div class="mb-2 font-medium text-method1">QFocus</div>
+          <div class="flex items-center gap-3">
+            <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3eme_qf3">
+              <i class="fa fa-play text-xl"></i>
+            </button>
+            <div class="flex-1">
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3eme_qf3" style="width: 0%"></div>
+              </div>
+              <div class="text-xs text-gray-500">
+                <span class="time-current" data-audio="s3eme_qf3">0:00</span>
+              </div>
+            </div>
+            <a href="audio/3/qfocus_unseen_31_EN_4.wav" download="qfocus_unseen_31_EN_4.wav" class="text-gray-500 hover:text-method1 transition-colors">
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+          <audio id="s3eme_qf3" src="audio/3/qfocus_unseen_31_EN_4.wav"></audio>
+        </div>
+
+        <div class="audio-player player-method2">
+          <div class="mb-2 font-medium text-method2">EME-TTS</div>
+          <div class="flex items-center gap-3">
+            <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3eme_eme3">
+              <i class="fa fa-play text-xl"></i>
+            </button>
+            <div class="flex-1">
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3eme_eme3" style="width: 0%"></div>
+              </div>
+              <div class="text-xs text-gray-500">
+                <span class="time-current" data-audio="s3eme_eme3">0:00</span>
+              </div>
+            </div>
+            <a href="audio/3/EME_01_skirt_surprise.wav" download="EME_01_skirt_surprise.wav" class="text-gray-500 hover:text-method2 transition-colors">
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+          <audio id="s3eme_eme3" src="audio/3/EME_01_skirt_surprise.wav"></audio>
+        </div>
+      </div>
+
+      <!-- 第四组：wear 加粗标红 -->
+      <p class="text-gray-600 mb-3 mt-6">
+        <span class="font-semibold">Text:</span> "She is now choosing skirt to <span class="font-bold text-red-600">wear</span>."
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+        <div class="audio-player player-method1">
+          <div class="mb-2 font-medium text-method1">QFocus</div>
+          <div class="flex items-center gap-3">
+            <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s3eme_qf4">
+              <i class="fa fa-play text-xl"></i>
+            </button>
+            <div class="flex-1">
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s3eme_qf4" style="width: 0%"></div>
+              </div>
+              <div class="text-xs text-gray-500">
+                <span class="time-current" data-audio="s3eme_qf4">0:00</span>
+              </div>
+            </div>
+            <a href="audio/3/qfocus_unseen_31_EN_6.wav" download="qfocus_unseen_31_EN_6.wav" class="text-gray-500 hover:text-method1 transition-colors">
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+          <audio id="s3eme_qf4" src="audio/3/qfocus_unseen_31_EN_6.wav"></audio>
+        </div>
+
+        <div class="audio-player player-method2">
+          <div class="mb-2 font-medium text-method2">EME-TTS</div>
+          <div class="flex items-center gap-3">
+            <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s3eme_eme4">
+              <i class="fa fa-play text-xl"></i>
+            </button>
+            <div class="flex-1">
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s3eme_eme4" style="width: 0%"></div>
+              </div>
+              <div class="text-xs text-gray-500">
+                <span class="time-current" data-audio="s3eme_eme4">0:00</span>
+              </div>
+            </div>
+            <a href="audio/3/EME_01_wear_sad.wav" download="EME_01_wear_sad.wav" class="text-gray-500 hover:text-method2 transition-colors">
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+          <audio id="s3eme_eme4" src="audio/3/EME_01_wear_sad.wav"></audio>
+        </div>
+      </div>
+
+    </div>
     </section>
     
     <!-- 章节4: Ablation Experiments -->
+    <!-- 章节1: Automated Speech Stress Editing ability -->
     <section class="section-card">
       <h2 class="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
         4. Ablation Experiments
@@ -475,83 +1261,150 @@
       
       <!-- 样本组1 -->
       <div class="sample-group">
-        <h3 class="text-xl font-medium text-gray-800 mb-3">Sample 4.1: Component Analysis</h3>
         <p class="text-gray-600 mb-3">
-          <span class="font-semibold">Text:</span> "Ablation testing reveals component contributions"
+          <span class="font-semibold">Text:</span> "你<span class="font-bold text-red-600">居然</span>忘了带钥匙。"
         </p>
-        <p class="text-gray-600 mb-4">
-          <span class="font-semibold">Description:</span> Analysis of individual components' contributions
-        </p>
+      
         
-        <!-- 音频对比组 -->
-        <div class="audio-comparison">
-          <!-- 方法1 -->
+        <!-- 音频对比组（已将 Ground Truth 与 QFocus 交换位置） -->
+        <div class="audio-comparison-3">
+          <!-- 方法1 (现在展示 QFocus) -->
           <div class="audio-player player-method1">
-            <div class="mb-2 font-medium text-method1">Full Model</div>
+            <div class="mb-2 font-medium text-method1">QFocus</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s4g1a1">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="s1g1a3">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s4g1a1" style="width: 0%"></div>
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="s1g1a3" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s4g1a1">0:00</span>
+                  <span class="time-current" data-audio="s1g1a3">0:00</span>
                 </div>
               </div>
-              <a href="audio/s4g1a1.mp3" download="s4g1a1.mp3" class="text-gray-500 hover:text-method1 transition-colors">
+              <a href="audio/4/1_bkf30_1_2_你居然忘了带钥匙.wav" download="1_bkf30_1_2_你居然忘了带钥匙.wav" class="text-gray-500 hover:text-method1 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s4g1a1" src="audio/s4g1a1.mp3">
+            <audio id="s1g1a3" src="audio/4/1_bkf30_1_2_你居然忘了带钥匙.wav"></audio>
           </div>
           
-          <!-- 方法2 -->
+          <!-- 方法2 (Manually Editing, 保持不变) -->
           <div class="audio-player player-method2">
-            <div class="mb-2 font-medium text-method2">Without Component A</div>
+            <div class="mb-2 font-medium text-method2">QFocus w/o EGN</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s4g1a2">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="s1g1a2">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s4g1a2" style="width: 0%"></div>
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="s1g1a2" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s4g1a2">0:00</span>
+                  <span class="time-current" data-audio="s1g1a2">0:00</span>
                 </div>
               </div>
-              <a href="audio/s4g1a2.mp3" download="s4g1a2.mp3" class="text-gray-500 hover:text-method2 transition-colors">
+              <a href="audio/4/1_bkf30_1_2_你居然忘了带钥匙_wo_EGN.wav" download="1_bkf30_1_2_你居然忘了带钥匙_wo_EGN.wav" class="text-gray-500 hover:text-method2 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s4g1a2" src="audio/s4g1a2.mp3">
+            <audio id="s1g1a2" src="audio/4/1_bkf30_1_2_你居然忘了带钥匙_wo_EGN.wav"></audio>
           </div>
           
-          <!-- 方法3 -->
+          <!-- 方法3 (现在展示 Ground Truth) -->
           <div class="audio-player player-method3">
-            <div class="mb-2 font-medium text-method3">Without Component B</div>
+            <div class="mb-2 font-medium text-method3">QFocus w/o EAL</div>
             <div class="flex items-center gap-3">
-              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="s4g1a3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="bkm21_8416137-gt">
                 <i class="fa fa-play text-xl"></i>
               </button>
               <div class="flex-1">
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="s4g1a3" style="width: 0%"></div>
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="bkm21_8416137-gt" style="width: 0%"></div>
                 </div>
                 <div class="text-xs text-gray-500">
-                  <span class="time-current" data-audio="s4g1a3">0:00</span>
+                  <span class="time-current" data-audio="bkm21_8416137-gt">0:00</span>
                 </div>
               </div>
-              <a href="audio/s4g1a3.mp3" download="s4g1a3.mp3" class="text-gray-500 hover:text-method3 transition-colors">
+              <a href="audio/4/1_bkf30_1_2_你居然忘了带钥匙_wo_loss.wav" download="1_bkf30_1_2_你居然忘了带钥匙_wo_loss.wav" class="text-gray-500 hover:text-method3 transition-colors">
                 <i class="fa fa-download"></i>
               </a>
             </div>
-            <audio id="s4g1a3" src="audio/s4g1a3.mp3">
+            <audio id="bkm21_8416137-gt" src="audio/4/1_bkf30_1_2_你居然忘了带钥匙_wo_loss.wav"></audio>
+          </div>
+        </div>
+
+        <!-- 新增一行三列音频与文本 -->
+        <p class="text-gray-600 mt-4 mb-3">
+          <span class="font-semibold">Text:</span> "Thank you for your <span class="font-bold text-red-600">patience</span>."
+        </p>
+        <div class="audio-comparison-3">
+          <div class="audio-player player-method1">
+            <div class="mb-2 font-medium text-method1">QFocus</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method1 hover:text-method1/80 transition-colors" data-audio="bkf30_0342139_qfocus">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method1 h-2 rounded-full" data-audio="bkf30_0342139_qfocus" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="bkf30_0342139_qfocus">0:00</span>
+                </div>
+              </div>
+              <a href="audio/4/qfocus_ex02_111.wav" download="qfocus_ex02_111.wav" class="text-gray-500 hover:text-method1 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="bkf30_0342139_qfocus" src="audio/4/qfocus_ex02_111.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method2">
+            <div class="mb-2 font-medium text-method2">QFocus w/o EGN</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method2 hover:text-method2/80 transition-colors" data-audio="bkf30_0342139_manual">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method2 h-2 rounded-full" data-audio="bkf30_0342139_manual" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="bkf30_0342139_manual">0:00</span>
+                </div>
+              </div>
+              <a href="audio/4/qfocus_ex02_222.wav" download="qfocus_ex02_222.wav" class="text-gray-500 hover:text-method2 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="bkf30_0342139_manual" src="audio/4/qfocus_ex02_222.wav"></audio>
+          </div>
+
+          <div class="audio-player player-method3">
+            <div class="mb-2 font-medium text-method3">QFocus w/o EAL</div>
+            <div class="flex items-center gap-3">
+              <button class="play-btn text-method3 hover:text-method3/80 transition-colors" data-audio="bkf30_0342139_gt">
+                <i class="fa fa-play text-xl"></i>
+              </button>
+              <div class="flex-1">
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                  <div class="progress-bar bg-method3 h-2 rounded-full" data-audio="bkf30_0342139_gt" style="width: 0%"></div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  <span class="time-current" data-audio="bkf30_0342139_gt">0:00</span>
+                </div>
+              </div>
+              <a href="audio/4/qfocus_ex02_333.wav" download="qfocus_ex02_333.wav" class="text-gray-500 hover:text-method3 transition-colors">
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+            <audio id="bkf30_0342139_gt" src="audio/4/qfocus_ex02_333.wav"></audio>
           </div>
         </div>
       </div>
+      
     </section>
     
     <!-- 感谢信息 -->
@@ -657,4 +1510,4 @@
   </script>
 </body>
 </html>
-    
+
